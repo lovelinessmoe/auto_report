@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div style="margin: 0 auto;text-align: center;width: 100%">
+    <%- user.username %>
+    Cookie:<form method="post" action="/editCookie">
+        <input style="width: 350px" type="text" required="required" name="cookie" placeholder="<%- user.cookie %>">
+        <button type="submit">更改</button>
+    </form>
+</div>
+</body>
+</html>
