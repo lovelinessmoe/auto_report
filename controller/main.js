@@ -39,6 +39,17 @@ submit = async (cookie) => {
     axios.post('https://auth.imnu.edu.cn/app.php/imnu_apps/epidemic/index/report', data, {
         headers:
             {
+                "Host": "auth.imnu.edu.cn",
+                "accept": "application/json, text/javascript, */*; q=0.01",
+                "x-requested-with": "XMLHttpRequest",
+                "x-tingyun-id": "o_vYQuJFAnI;r=308115395",
+                "origin": "https://auth.imnu.edu.cn",
+                "sec-fetch-site": "same-origin",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-dest": "empty",
+                "referer": "https://auth.imnu.edu.cn/app.php/imnu_apps/epidemic/index/daily_report",
+                "accept-encoding": "gzip, deflate",
+                "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
                 "content-type": "application/json",
                 "cookie": cookie
             }
@@ -59,10 +70,11 @@ forSubmit = async () => {
                WHERE cookie IS NOT NULL`;
     let rs = await mysql.query(sql);
     for (const it of rs) {
-        if (it.cookie !== undefined) {
+        if (it.cookie !== undefined || it.cookie === '') {
             console.log("-------------submit--------------");
             console.log(`username: ${it.username}`);
-            submit(it.cookie);
+            console.log(`cookie: ${it.cookie}`);
+            await submit(it.cookie);
         }
     }
 }
