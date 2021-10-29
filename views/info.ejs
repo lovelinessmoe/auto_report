@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Getting Started</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/-Login-form-Page-BS4-.css">
+    <link rel="stylesheet" href="assets/css/Newsletter-Subscription-Form.css">
+</head>
+
+<body>
+<header class="p-sm-5 p-4">
+    <div class="row justify-content-center">
+        <div class="col-auto text-center text-sm-left align-self-center mt-3 mt-sm-0">
+            <h1>内蒙古师范大学自动晨午报</h1>
+            <p class="lead">每天7点和12点的1,2,3分钟会请求一次<br>保证打卡成功</p>
+        </div>
+    </div>
+</header>
+<div class="container bg-white border rounded border-white shadow-sm main">
+    <section class="content">
+        <h2><span>1</span>&nbsp;手机下载HttpCanary</h2><img src="assets/img/Screenshot_20211028222701.jpg"
+                                                        style="text-align: center;width: 100px;"><img
+                src="assets/img/Screenshot_20211028-223047_HttpCanary.png"
+                style="width: calc(100% - 100px);text-align: center;">
+    </section>
+    <div class="dropdown">
+        <button class="btn btn-primary btn-block dropdown-toggle shadow" aria-expanded="false" data-toggle="dropdown"
+                id="downod" type="button" onclick="down()">下载 提取码:fr09
+        </button>
+        <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second
+                Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+    </div>
+    <section class="content">
+        <h2><span>2</span>&nbsp;开始抓包</h2>
+        <p>点击右下角进行抓包，自己进行晨午检的操作<br>打卡成功后在筛选里选择如图host</p>
+        <figure class="figure"></figure>
+        <figure class="figure"></figure>
+        <img src="assets/img/Screenshot_20211028-223137_HttpCanary.png" style="width: 50%;"><img
+                src="assets/img/Screenshot_20211028-223143_HttpCanary.png" style="width: 50%;">
+    </section>
+    <section class="content">
+        <h2><span>3</span>&nbsp;打开包</h2>
+        <p>找到请求<br>POST https://auth.imnu.edu.cn/app.php/imnu_apps/epidemic/index/report</p><img
+                src="assets/img/Screenshot_20211028-223155_HttpCanary.png" style="width: 100%;">
+    </section>
+    <section class="content">
+        <h2><span>4</span>&nbsp;复制Cookie</h2>
+        <figure class="figure"><img class="img-thumbnail figure-img"
+                                    src="assets/img/Screenshot_20211028-223202_HttpCanary.png"></figure>
+    </section>
+    <section class="content">
+        <h2><span>5</span>&nbsp;最后一步</h2>
+        <p><strong>打开http://imnu.javaee.xyz/index</strong></p>
+        <button class="btn btn-primary btn-block dropdown-toggle shadow" aria-expanded="false" data-toggle="dropdown"
+                type="button" onclick="jump()">前往
+        </button>
+        <figure class="figure"><img class="img-thumbnail figure-img" src="assets/img/wr.png"></figure>
+    </section>
+    <p>注册登陆账号后将复制的cookie填入框中提交即可</p>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+<script>
+    jump = () => {
+        window.location.href = "http://imnu.javaee.xyz/index";
+    };
+    down = () => {
+        window.location.href = "https://pan.baidu.com/s/1GBbbZOgAyA4lGavjYR_W1Q";
+    };
+</script>
+
+</html>

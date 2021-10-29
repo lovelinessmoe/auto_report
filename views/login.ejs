@@ -1,28 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="/Css/login.css"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Getting Started</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/-Login-form-Page-BS4-.css">
+    <link rel="stylesheet" href="assets/css/Newsletter-Subscription-Form.css">
 </head>
+
 <body>
-<div style="margin: 0 auto;text-align: center;width: 50%">
-    <div id="login">
-        <h1>Login</h1>
-        <form method="post" action="/login">
-            <input type="text" required="required" placeholder="用户名" name="username"></input>
-            <input type="password" required="required" placeholder="密码" name="password"></input>
-            <button class="but" type="submit">登录</button>
-        </form>
-    </div>
-    <div id="register">
-        <h1>Register</h1>
-        <form method="post" action="/register">
-            <input type="text" required="required" placeholder="用户名" name="username"></input>
-            <input type="password" required="required" placeholder="密码" name="password"></input>
-            <button class="but" type="submit">注册</button>
-        </form>
+<div class="container-fluid">
+    <div class="row mh-100vh">
+        <div class="col-10 col-sm-8 col-md-6 col-lg-6 offset-1 offset-sm-2 offset-md-3 offset-lg-0 align-self-center d-lg-flex align-items-lg-center align-self-lg-stretch bg-white p-5 rounded rounded-lg-0 my-5 my-lg-0"
+             id="login-block">
+            <div class="m-auto w-lg-75 w-xl-50">
+                <h2 class="text-info font-weight-light mb-5">&nbsp;Loveliness</h2>
+                <form method="post" action="/login">
+                    <div class="form-group"><label class="text-secondary">邮箱</label><input class="form-control"
+                                                                                            type="email" required="true"
+                                                                                            name="username"
+                                                                                            id="username"></div>
+                    <div class="form-group"><label class="text-secondary">密码</label><input class="form-control"
+                                                                                           type="password"
+                                                                                           required="true"
+                                                                                           name="password"
+                                                                                           id="password"></div>
+                    <button class="btn btn-info mt-2" type="submit"
+                            style="width: 50%;">登陆
+                    </button>
+                </form>
+                <button class="btn btn-info mt-2"
+                        style="width: 50%;" onclick="register()">注册
+                </button>
+                <p class="mt-3 mb-0"></p>
+            </div>
+        </div>
+        <div class="col-lg-6 d-flex align-items-end" id="bg-block"
+             style="background-image:url(&quot;assets/img/aldain-austria-316143-unsplash.jpg&quot;);background-size:cover;background-position:center center;">
+            <p class="ml-auto small text-dark mb-2"><br></p>
+        </div>
     </div>
 </div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
+<script>
+
+    register = () => {
+        let username = $('#username').val();
+        let password = $('#password').val();
+        $.post("/register", {username, password}, function (res) {
+            alert(res);
+        });
+    }
+
+</script>
 </html>

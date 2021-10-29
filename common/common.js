@@ -14,6 +14,13 @@ common.checkLogin = async (req, res, next) => {
         next();
     }
 };
+common.checkAdmin = async (req, res, next) => {
+    if (req.session.user.id === 1) {
+        next();
+    } else {
+        return res.send("????");
+    }
+};
 common.info = async (req, res, next) => {
     console.log("===========info===========");
     if (req.session.user !== undefined) {

@@ -6,15 +6,18 @@
  */
 const express = require('express');
 const common = require('../common/common');
-const {checkLogin, info} = common;
+const {checkLogin, info, checkAdmin} = common;
 const router = express.Router();
 
-router.get('/', function (req, res, next) {
+router.get('/index', function (req, res, next) {
     //销毁登陆状态
     if (req.session) {
         req.session.destroy();
     }
     res.render('login');
+});
+router.get('/info', function (req, res, next) {
+    res.render('info');
 });
 router.get('/home', checkLogin, info, async (req, res, next) => {
     res.render('home');
@@ -27,5 +30,6 @@ router.post('/register', info, user.register);
 
 const main = require('../controller/main');
 router.post('/editCookie', checkLogin, info, main.editCookie);
+router.get('/submit', checkLogin, checkAdmin, info, main.submitM);
 
 module.exports = router;

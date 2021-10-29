@@ -26,12 +26,12 @@ user.register = async (req, res) => {
     let sql = "select count(1) as num from `user` where username = ?";
     let rs = await mysql.query(sql, [username]);
     console.log(rs);
-    if (rs[0].num > 1) {
-        res.send("用户名已存在");
+    if (rs[0].num >= 1) {
+        res.json(200, "用户名已存在");
     } else {
         sql = "insert into `user` (username, password) values (?,?)";
         await mysql.query(sql, [username, password]);
-        res.redirect("/");
+        res.json(200, "注册成功");
     }
 };
 

@@ -7,6 +7,7 @@
 const main = {};
 const mysql = require('../module/mysql');
 const axios = require('axios');
+const moment = require('moment');
 
 main.editCookie = async (req, res, next) => {
     const {cookie} = req.body;
@@ -53,8 +54,9 @@ submit = async (cookie) => {
 }
 
 forSubmit = async () => {
-    let sql = `select *
-               from user`;
+    let sql = `SELECT *
+               FROM \`user\`
+               WHERE cookie IS NOT NULL`;
     let rs = await mysql.query(sql);
     for (const it of rs) {
         if (it.cookie !== undefined) {
@@ -67,6 +69,12 @@ forSubmit = async () => {
 
 const CronJob = require('cron').CronJob;
 new CronJob('0 1,2,3 7,12 * * *', forSubmit, null, true);
+
+main.submitM = async (req, res, next) => {
+    forSubmit();
+    res.send("ok");
+};
+
 
 module.exports = main;
 
