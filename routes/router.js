@@ -19,8 +19,11 @@ router.get('/index', function (req, res, next) {
 router.get('/info', function (req, res, next) {
     res.render('info');
 });
-router.get('/home', checkLogin, info, async (req, res, next) => {
+router.get('/home', checkLogin, info, (req, res, next) => {
     res.render('home');
+});
+router.get('/',  info,  (req, res, next) => {
+    res.render('info');
 });
 
 const user = require('../controller/user');
