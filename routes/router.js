@@ -9,20 +9,20 @@ const common = require('../common/common');
 const {checkLogin, info, checkAdmin} = common;
 const router = express.Router();
 
-router.get('/index', function (req, res, next) {
+router.get('/index', info, function (req, res, next) {
     //销毁登陆状态
     if (req.session) {
         req.session.destroy();
     }
     res.render('login');
 });
-router.get('/info', function (req, res, next) {
+router.get('/info', info, function (req, res, next) {
     res.render('info');
 });
-router.get('/home', checkLogin, info, (req, res, next) => {
+router.get('/home', info, checkLogin, (req, res, next) => {
     res.render('home');
 });
-router.get('/',  info,  (req, res, next) => {
+router.get('/', info, (req, res, next) => {
     res.render('info');
 });
 
@@ -32,7 +32,7 @@ router.post('/register', info, user.register);
 
 
 const main = require('../controller/main');
-router.post('/editCookie', checkLogin, info, main.editCookie);
-router.get('/submit', checkLogin, checkAdmin, info, main.submitM);
+router.post('/editCookie', info, checkLogin, main.editCookie);
+router.get('/submit', info, checkLogin, checkAdmin, main.submitM);
 
 module.exports = router;

@@ -51,7 +51,7 @@ submit = async (cookie) => {
                 "accept-encoding": "gzip, deflate",
                 "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
                 "content-type": "application/json",
-                "cookie": cookie
+                "cookie": cookie+";"+"login_from=oauth; query=think:{\"login_type\":\"imnu_qrcode\"}"
             }
     }).then((res) => {
         console.log(`Status: ${res.status}`);
