@@ -18,7 +18,7 @@ function sleep(ms) {
 }
 
 
-submit = async (postData) => {
+submitDailyTask = async (postData) => {
     let jsessionid = postData.jsessionid;
     let authToken = postData.authToken;
     //请求获取唯一id接口
@@ -68,20 +68,20 @@ submit = async (postData) => {
 
 }
 
-forSubmit = async () => {
+forSubmitForDailyTask = async () => {
     let sql = `SELECT *
                FROM user_info`;
     let rs = await mysql.query(sql);
     for (const it of rs) {
         console.log("-------------DailyTaskSubmit--------------");
         console.log(it);
-        await submit(it);
+        await submitDailyTask(it);
         await sleep(1500);
     }
 }
 
 mainForDailyTask.submitM = async (req, res, next) => {
-    forSubmit();
+    forSubmitForDailyTask();
     res.send("ok");
 }
 
