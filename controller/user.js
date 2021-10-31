@@ -5,7 +5,7 @@
  * @Version 1.0
  */
 const user = {};
-const mysql = require('../module/mysql');
+const mysql = require('../common/mysql');
 
 user.login = async (req, res) => {
     let {username, password} = req.body;

@@ -35,4 +35,8 @@ const main = require('../controller/main');
 router.post('/editCookie', info, checkLogin, main.editCookie);
 router.get('/submit', info, checkLogin, checkAdmin, main.submitM);
 
+const mainForDailyTask = require('../controller/DailyTask/mainForDailyTask');
+router.get('/DT', info, checkLogin, checkAdmin, mainForDailyTask.submitM);
+// router.get('/DT', mainForDailyTask.submitM);
+
 module.exports = router;
