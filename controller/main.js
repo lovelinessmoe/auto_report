@@ -93,7 +93,6 @@ submit = async (cookie) => {
 }
 
 forSubmit = async () => {
-    console.log("forSubmit")
     let sql = `SELECT *
                FROM \`user\`
                WHERE cookie IS NOT NULL`;
@@ -114,7 +113,6 @@ const CronJob = require('cron').CronJob;
 new CronJob('0 5,10 7,12 * * *', forSubmit, null, true);
 
 main.submitM = async (req, res, next) => {
-    console.log("sfsdf")
     forSubmit();
     res.send("ok");
 };
