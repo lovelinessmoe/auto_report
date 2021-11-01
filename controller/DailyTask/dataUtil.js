@@ -7,6 +7,13 @@
 const dataUtil = {};
 const moment = require('moment');
 
+
+function urlencode(str) {
+    str = (str + '').toString();
+
+    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
+}
+
 /*
     Math方法获取uuid
  */
@@ -454,6 +461,7 @@ dataUtil.getData = async (data, uniqueIdentify) => {
         "typeStr": "user",
         "left": 10,
         "nodeEvent": JSON.stringify(nodeEvent),
+        // "nodeEvent": "[{\"implWay\":\"internalImpl\",\"attestationId\":\"\",\"serviceId\":\"529f36a96ff9f490016fffe117a501dc\",\"serviceName\":\"数据采集节点事件\",\"parameters\":\"[{\\\"id\\\":\\\"529f36a96ff9f490016fffe1addb01dd\\\",\\\"paramName\\\":\\\"ruleId\\\",\\\"paramValue\\\":\\\"cf3f350cd0094263a59d3b95415b50f2@_@CollectRuleValue\\\",\\\"paramType\\\":\\\"2\\\",\\\"dataType\\\":\\\"String\\\",\\\"paramDesc\\\":null,\\\"serviceId\\\":\\\"529f36a96ff9f490016fffe117a501dc\\\",\\\"createTime\\\":\\\"2020-01-31T00:32:57.000Z\\\",\\\"paramText\\\":\\\"健康筛查表\\\"}]\",\"eventType\":\"nodeExecute\"}]",
         "type": 6,
         "top": 105,
         "pId": 0,
@@ -489,16 +497,47 @@ dataUtil.getData = async (data, uniqueIdentify) => {
 
     //填报日期
     formJson[0].TBRQ = moment().format("YYYY-MM-DD HH:mm:00");
+    //flowJson id
     flowJson[0].id = Math.uuidFast();
     flowJson[0].name = data.XGH;
     flowJson[0].title = data.XM;
+    //uniqueIdentify
+    instJson.uniqueIdentify = uniqueIdentify;
 
     // let {DWXY, BMBJ, XZSF, LXDH, XM, XB, XGH, DWWZ, JTMDD} = data;
     // formJson = {DWXY, BMBJ, XZSF, LXDH, XM, XB, XGH, DWWZ, JTMDD};
 
     for (const it in data) {
-        formJson[0][it] = data[it];
+        if (it !== 'user_id' && it !== 'jsessionid' && it !== 'authToken') {
+            formJson[0][it] = data[it];
+        }
     }
+    /*
+
+        return "instJson=" + urlencode(JSON.stringify(instJson)) + "&" +
+            "formJson=" + urlencode(JSON.stringify(formJson)) + "&" +
+            "starterFormId=" + urlencode(starterFormId) + "&" +
+            "flowJson=" + urlencode(JSON.stringify(flowJson)) + "&" +
+            "defaultFormContent=" + urlencode(defaultFormContent) + "&" +
+            "annexJson=" + urlencode(JSON.stringify(annexJson)) + "&" +
+            "makeCopeJson=" + urlencode(makeCopeJson) + "&" +
+            "auditJson=" + urlencode(auditJson) + "&" +
+            "flowVerJson=" + urlencode(JSON.stringify(flowVerJson)) + "&" +
+            "formVerJson=" + urlencode(JSON.stringify(formVerJson));
+    */
+
+    /*return {
+        instJson,
+        formJson,
+        starterFormId,
+        flowJson,
+        defaultFormContent,
+        annexJson,
+        makeCopeJson,
+        auditJson,
+        flowVerJson,
+        formVerJson
+    };*/
 
     return "instJson=" + JSON.stringify(instJson) + "&" +
         "formJson=" + JSON.stringify(formJson) + "&" +
@@ -510,6 +549,7 @@ dataUtil.getData = async (data, uniqueIdentify) => {
         "auditJson=" + auditJson + "&" +
         "flowVerJson=" + JSON.stringify(flowVerJson) + "&" +
         "formVerJson=" + JSON.stringify(formVerJson);
+
 }
 
 

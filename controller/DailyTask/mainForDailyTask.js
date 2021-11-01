@@ -22,7 +22,7 @@ submitDailyTask = async (postData) => {
     let jsessionid = postData.jsessionid;
     let authToken = postData.authToken;
     //请求获取唯一id接口
-    let uniqueIdentify = await axios.post('http://eip.imnu.edu.cn/EIP/flowcfg/synergy_template/querySynergyTemplateById.htm',
+    let uniqueIdentifyrs = await axios.post('http://eip.imnu.edu.cn/EIP/flowcfg/synergy_template/querySynergyTemplateById.htm',
         "flowKey=65369", {
             headers:
                 {
@@ -43,14 +43,20 @@ submitDailyTask = async (postData) => {
                 }
         });
 
-    uniqueIdentify = uniqueIdentify.data.uniqueIdentify;
+    let uniqueIdentify = uniqueIdentifyrs.data.uniqueIdentify;
+    // console.log(uniqueIdentify)
     let data = await dataUtil.getData(postData, uniqueIdentify);
+
+    console.log("--------------------------");
+    console.log(data);
+    console.log("--------------------------");
 
     //请求打卡接口
     let rs = await axios.post('http://eip.imnu.edu.cn/EIP/cooperative/sendCooperative.htm', data, {
         headers:
             {
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                // "Content-Type": "application/json",
                 "Host": "eip.imnu.edu.cn",
                 "Connection": "keep-alive",
                 "Accept": "*/*",
@@ -63,9 +69,10 @@ submitDailyTask = async (postData) => {
                 "Cookie": jsessionid + ";" + "ht_platform=wxWork" + ";" + authToken,
             }
     });
-    console.log(rs.data);
+    console.log("--------------------------");
+    console.log(rs);
+    console.log("--------------------------");
     console.log("-------------DailyTaskSubmitEnd--------------");
-
 }
 
 forSubmitForDailyTask = async () => {
